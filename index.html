@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="/vite.svg">
+
+  <link rel="preload" href="/fonts/open-sans-v36-cyrillic_latin-regular.woff2"
+    as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/open-sans-v36-cyrillic_latin-700.woff2"
+    as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v13-cyrillic_latin-regular.woff2"
+    as="font" type="font/woff2" crossorigin>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мебельный маркет Koff</title>
   <script type="module" src="/main.js"></script>
@@ -26,9 +34,9 @@
             viewBox="0 0 16 16" fill="none">
             <path
               d="M7.66671 13.9999C11.1645 13.9999 14 11.1644 14 7.66659C14 4.16878 11.1645 1.33325 7.66671 1.33325C4.1689 1.33325 1.33337 4.16878 1.33337 7.66659C1.33337 11.1644 4.1689 13.9999 7.66671 13.9999Z"
-              stroke="#1C1C1C" stroke-width="1.5" stroke-linecap="round"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
-            <path d="M14.6667 14.6666L13.3334 13.3333" stroke="#1C1C1C"
+            <path d="M14.6667 14.6666L13.3334 13.3333" stroke="currentColor"
               stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
@@ -82,7 +90,8 @@
             <a class="catalog__link" href="/category?slug=Диваны">Диваны</a>
           </li>
           <li class="catalog__item">
-            <a class="catalog__link" href="/category?slug=Шкафы">Шкафы</a>
+            <a class="catalog__link catalog__link_active"
+              href="/category?slug=Шкафы">Шкафы</a>
           </li>
           <li class="catalog__item">
             <a class="catalog__link" href="/category?slug=Стулья">Стулья</a>
@@ -131,7 +140,7 @@
       </div>
     </div>
 
-    <section class="goods" hidden>
+    <section class="goods">
       <div class="container">
 
         <h2 class="goods__title">Избранное</h2>
@@ -139,18 +148,20 @@
         <ul class="goods__list">
           <li class="goods__item">
             <article class="goods__card card">
-              <a class="card__link" href="/product">
+              <a class="card__link card__link_img" href="/product">
                 <img class="card__img" src="/img/photo.jpg"
                   alt="Кресло с подколодниками">
               </a>
 
-              <h3 class="card__title">
-                <a class="card__link" href="/product">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
+              <div class="card__info">
+                <h3 class="card__title">
+                  <a class="card__link" href="/product">
+                    Кресло с подлокотниками
+                  </a>
+                </h3>
 
-              <p class="card__price">5&nbsp;000&nbsp;₽</p>
+                <p class="card__price">5&nbsp;000&nbsp;₽</p>
+              </div>
 
               <button class="card__btn">В корзину</button>
 
@@ -167,18 +178,20 @@
           </li>
           <li class="goods__item">
             <article class="goods__card card">
-              <a class="card__link" href="/product">
+              <a class="card__link card__link_img" href="/product">
                 <img class="card__img" src="/img/photo.jpg"
                   alt="Кресло с подколодниками">
               </a>
 
-              <h3 class="card__title">
-                <a class="card__link" href="/product">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
+              <div class="card__info">
+                <h3 class="card__title">
+                  <a class="card__link" href="/product">
+                    Кресло с подлокотниками
+                  </a>
+                </h3>
 
-              <p class="card__price">5&nbsp;000&nbsp;₽</p>
+                <p class="card__price">5&nbsp;000&nbsp;₽</p>
+              </div>
 
               <button class="card__btn">В корзину</button>
 
@@ -195,18 +208,20 @@
           </li>
           <li class="goods__item">
             <article class="goods__card card">
-              <a class="card__link" href="/product">
+              <a class="card__link card__link_img" href="/product">
                 <img class="card__img" src="/img/photo.jpg"
                   alt="Кресло с подколодниками">
               </a>
 
-              <h3 class="card__title">
-                <a class="card__link" href="/product">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
+              <div class="card__info">
+                <h3 class="card__title">
+                  <a class="card__link" href="/product">
+                    Кресло с подлокотниками
+                  </a>
+                </h3>
 
-              <p class="card__price">5&nbsp;000&nbsp;₽</p>
+                <p class="card__price">5&nbsp;000&nbsp;₽</p>
+              </div>
 
               <button class="card__btn">В корзину</button>
 
@@ -223,18 +238,20 @@
           </li>
           <li class="goods__item">
             <article class="goods__card card">
-              <a class="card__link" href="/product">
+              <a class="card__link card__link_img" href="/product">
                 <img class="card__img" src="/img/photo.jpg"
                   alt="Кресло с подколодниками">
               </a>
 
-              <h3 class="card__title">
-                <a class="card__link" href="/product">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
+              <div class="card__info">
+                <h3 class="card__title">
+                  <a class="card__link" href="/product">
+                    Кресло с подлокотниками
+                  </a>
+                </h3>
 
-              <p class="card__price">5&nbsp;000&nbsp;₽</p>
+                <p class="card__price">5&nbsp;000&nbsp;₽</p>
+              </div>
 
               <button class="card__btn">В корзину</button>
 
@@ -405,7 +422,7 @@
       </div>
     </section>
 
-    <section class="cart">
+    <section class="cart" hidden>
       <div class="container cart__container">
         <h2 class="cart__title">Корзина</h2>
 
@@ -499,12 +516,12 @@
           <fieldset class="form-order__fieldset form-order__fieldset_radio">
             <legend class="form-order__legend">Доставка</legend>
 
-            <label class="form-order-label radio">
+            <label class="form-order__label radio">
               <input class="radio__input" type="radio" name="deliveryType"
                 value="delivery">Доставка
             </label>
 
-            <label class="form-order-label radio">
+            <label class="form-order__label radio">
               <input class="radio__input" type="radio" name="deliveryType"
                 value="pickup">Самовывоз
             </label>
@@ -513,12 +530,12 @@
           <fieldset class="form-order__fieldset form-order__fieldset_radio">
             <legend class="form-order__legend">Оплата</legend>
 
-            <label class="form-order-label radio">
+            <label class="form-order__label radio">
               <input class="radio__input" type="radio" name="paymentType"
                 value="card">Картой при получении
             </label>
 
-            <label class="form-order-label radio">
+            <label class="form-order__label radio">
               <input class="radio__input" type="radio" name="paymentType"
                 value="cash">Наличными при получении
             </label>
