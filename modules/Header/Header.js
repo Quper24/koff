@@ -1,5 +1,6 @@
+import { Logo } from "../../features/Logo/Logo";
+import { likeSvg } from "../../features/likeSvg/likeSvg";
 import { addContainer } from "../addContainer";
-import logoImg from "/img/logo.svg";
 
 export class Header {
   static instance = null;
@@ -21,7 +22,7 @@ export class Header {
       return;
     }
 
-    const logo = this.getLogo();
+    const logo = new Logo("header").create();
     const searchForm = this.getSearchForm();
     const navigation = this.getNavigation();
 
@@ -34,20 +35,6 @@ export class Header {
   unmount() {
     this.element.remove();
     this.isMounted = false;
-  }
-
-  getLogo() {
-    const logo = document.createElement("a");
-    logo.classList.add("header__link-logo");
-    logo.href = "/";
-
-    const imgLogo = new Image();
-    imgLogo.classList.add("header__logo");
-    imgLogo.src = logoImg;
-    imgLogo.alt = "Логотип мебельного маркета Koff";
-
-    logo.append(imgLogo);
-    return logo;
   }
 
   getSearchForm() {
@@ -87,15 +74,14 @@ export class Header {
     const favoriteLink = document.createElement("a");
     favoriteLink.classList.add("header__link");
     favoriteLink.href = "/favorite";
-    favoriteLink.innerHTML = `
-      <span class="header__link-text">Избранное</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-        viewBox="0 0 16 16" fill="none">
-        <path
-          d="M8.41334 13.8733C8.18668 13.9533 7.81334 13.9533 7.58668 13.8733C5.65334 13.2133 1.33334 10.46 1.33334 5.79332C1.33334 3.73332 2.99334 2.06665 5.04001 2.06665C6.25334 2.06665 7.32668 2.65332 8.00001 3.55998C8.67334 2.65332 9.75334 2.06665 10.96 2.06665C13.0067 2.06665 14.6667 3.73332 14.6667 5.79332C14.6667 10.46 10.3467 13.2133 8.41334 13.8733Z"
-          stroke="#1C1C1C" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    `;
+    const favoriteText = document.createElement("span");
+    favoriteText.classList.add("header__link-text");
+    favoriteText.textContent = "Избранное";
+    favoriteLink.append(favoriteText);
+
+    likeSvg().then((svg) => {
+      favoriteLink.append(svg);
+    });
 
     const cartLink = document.createElement("a");
     cartLink.classList.add("header__link");
