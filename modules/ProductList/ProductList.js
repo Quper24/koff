@@ -18,7 +18,7 @@ export class ProductList {
     return ProductList.instance;
   }
 
-  mount(parent, data, title) {
+  mount(parent, data, title, emptyText) {
     this.containerElement.textContent = "";
 
     const titleElem = document.createElement("h2");
@@ -29,7 +29,19 @@ export class ProductList {
       : "goods__title visually-hidden";
 
     this.containerElement.append(titleElem);
-    this.updateListElem(data);
+
+    if (data && data.length) {
+      this.updateListElem(data);
+    } else {
+      this.containerElement.insertAdjacentHTML(
+        "beforeend",
+        `
+        <p class="goods__empty">${
+          emptyText || "Произошла ошибка попробуйте снова"
+        }</p>
+      `,
+      );
+    }
 
     if (this.isMounted) {
       return;

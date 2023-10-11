@@ -27,15 +27,9 @@
     gap: 8px;
   }
 
-  &__left {
-  }
-
-  &__current {
-  }
-
-  &__total {
-  }
-
-  &__right {
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 }
