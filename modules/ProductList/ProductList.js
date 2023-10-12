@@ -12,7 +12,6 @@ export class ProductList {
       this.element.classList.add("goods");
       this.containerElement = addContainer(this.element, "goods__container");
       this.isMounted = false;
-      this.addEvents();
     }
 
     return ProductList.instance;
@@ -56,7 +55,6 @@ export class ProductList {
     this.isMounted = false;
   }
 
-  addEvents() {}
   updateListElem(data = []) {
     const listElem = document.createElement("ul");
     listElem.classList.add("goods__list");

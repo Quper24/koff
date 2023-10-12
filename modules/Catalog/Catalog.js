@@ -1,3 +1,4 @@
+import { ApiService } from "../../services/ApiService";
 import { addContainer } from "../addContainer";
 
 export class Catalog {
@@ -15,13 +16,20 @@ export class Catalog {
     return Catalog.instance;
   }
 
-  mount(parent, data) {
+  async getData() {
+    this.catalogData = await new ApiService().getProductCategories();
+  }
+
+  async mount(parent) {
     if (this.isMounted) {
       return;
     }
 
-    this.renderListElem(data);
-    console.dir(parent);
+    if (!this.catalogData) {
+      await this.getData();
+      this.renderListElem(this.catalogData);
+    }
+
     parent.prepend(this.element);
     this.isMounted = true;
   }

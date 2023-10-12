@@ -169,6 +169,25 @@
   &__like {
     width: 16px;
     height: 16px;
+
+    svg {
+      fill: #ffffff;
+    }
+
+    &:hover,
+    &_active {
+      color: #780096;
+      svg {
+        fill: #780096;
+      }
+    }
+
+    &:active {
+      color: #c0f;
+      svg {
+        fill: #c0f;
+      }
+    }
   }
 
   &__arrow {
