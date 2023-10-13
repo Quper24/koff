@@ -1,5 +1,6 @@
 import { Logo } from "../../features/Logo/Logo";
 import { likeSvg } from "../../features/likeSvg/likeSvg";
+import { router } from "../../main";
 import { addContainer } from "../addContainer";
 
 export class Header {
@@ -63,6 +64,11 @@ export class Header {
           stroke-linejoin="round" />
       </svg>
     `;
+
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      router.navigate(`/search?q=${input.value}`);
+    });
 
     searchForm.append(input, button);
     return searchForm;

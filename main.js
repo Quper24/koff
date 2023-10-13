@@ -53,10 +53,11 @@ const init = () => {
 
         new BreadCrumbs().mount(new Main().element, [{ text: slug }]);
         new ProductList().mount(new Main().element, products, slug);
-        new Pagination()
-          .mount(new ProductList().containerElement)
-          .update(pagination);
-
+        if (pagination.totalProducts > pagination.limit) {
+          new Pagination()
+            .mount(new ProductList().containerElement)
+            .update(pagination);
+        }
         router.updatePageLinks();
       },
       {
@@ -65,6 +66,9 @@ const init = () => {
           new ProductList().unmount();
           new Catalog().unmount();
           done();
+        },
+        already(match) {
+          match.route.handler(match);
         },
       },
     )
@@ -84,9 +88,12 @@ const init = () => {
           "Избранное",
           "Вы ничего не добавили в избранное, пожалуйста, добавьте что-нибудь...",
         );
-        new Pagination()
-          .mount(new ProductList().containerElement)
-          .update(pagination);
+
+        if (pagination?.totalProducts > pagination?.limit) {
+          new Pagination()
+            .mount(new ProductList().containerElement)
+            .update(pagination);
+        }
         router.updatePageLinks();
       },
       {
@@ -101,9 +108,39 @@ const init = () => {
         },
       },
     )
-    .on("/search", () => {
-      console.log("search");
-    })
+    .on(
+      "/search",
+      async ({ params: { q } }) => {
+        new Catalog().mount(new Main().element);
+        const { data: product, pagination } = await api.getProducts({
+          q,
+        });
+        new BreadCrumbs().mount(new Main().element, [{ text: "Поиск" }]);
+        new ProductList().mount(
+          new Main().element,
+          product,
+          `Поиск: ${q}`,
+          `Ничего не найдено по вашему запросу "${q}"`,
+        );
+        if (pagination?.totalProducts > pagination?.limit) {
+          new Pagination()
+            .mount(new ProductList().containerElement)
+            .update(pagination);
+        }
+        router.updatePageLinks();
+      },
+      {
+        leave(done) {
+          new BreadCrumbs().unmount();
+          new ProductList().unmount();
+          new Catalog().unmount();
+          done();
+        },
+        already(match) {
+          match.route.handler(match);
+        },
+      },
+    )
     .on(
       "/product/:id",
       async (obj) => {
