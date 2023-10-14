@@ -12,6 +12,7 @@ import { Pagination } from "./features/Pagination/Pagination";
 import { BreadCrumbs } from "./features/BreadCrumbs/BreadCrumbs";
 import { ProductCard } from "./modules/ProductCard/ProductCard";
 import { productSlider } from "./features/productSlider/productSlider";
+import { Cart } from "./modules/Cart/Cart";
 
 export const router = new Navigo("/", { linksSelector: 'a[href^="/"]' });
 
@@ -168,9 +169,23 @@ const init = () => {
         },
       },
     )
-    .on("/cart", () => {
-      console.log("cart");
-    })
+    .on(
+      "/cart",
+      async () => {
+        const cartItems = await api.getCart();
+        new Cart().mount(
+          new Main().element,
+          cartItems,
+          "Корзина пуста, добавьте товары",
+        );
+      },
+      {
+        leave(done) {
+          new Cart().unmount();
+          done();
+        },
+      },
+    )
     .on("/order", () => {
       console.log("order");
     })
