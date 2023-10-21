@@ -46,7 +46,7 @@ const init = () => {
     .on(
       "/category",
       async ({ params: { slug, page = 1 } }) => {
-        new Catalog().mount(new Main().element);
+        (await new Catalog().mount(new Main().element)).setActiveLink(slug);
         const { data: products, pagination } = await api.getProducts({
           category: slug,
           page: page,
@@ -186,8 +186,12 @@ const init = () => {
         },
       },
     )
-    .on("/order", () => {
-      console.log("order");
+    .on("/order/:id", ({ data: { id } }) => {
+      console.log(`order: ${id}`);
+
+      api.getOrder(id).then((data) => {
+        console.log(data);
+      });
     })
     .notFound(() => {
       new Main().element.innerHTML = `
@@ -202,5 +206,9 @@ const init = () => {
     });
 
   router.resolve();
+
+  api.getCart().then((data) => {
+    new Header().changeCount(data.totalCount);
+  });
 };
 init();

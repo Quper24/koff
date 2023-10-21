@@ -84,7 +84,7 @@ export class ApiService {
         this.accessKey = null;
         this.accessKeyService.delete();
       }
-      console.error(error);
+      console.error(err);
     }
   }
 
@@ -113,7 +113,7 @@ export class ApiService {
         this.accessKey = null;
         this.accessKeyService.delete();
       }
-      console.error(error);
+      console.error(err);
     }
   }
 
@@ -144,5 +144,31 @@ export class ApiService {
       }
       console.error(error);
     }
+  }
+
+  async postOrder(data) {
+    if (!this.accessKey) {
+      await this.getAccessKey();
+    }
+
+    try {
+      const response = await axios.post(`${this.#apiUrl}api/orders`, data, {
+        headers: {
+          Authorization: `Bearer ${this.accessKey}`,
+        },
+      });
+
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.accessKey = null;
+        this.accessKeyService.delete();
+      }
+      console.error(err);
+    }
+  }
+
+  async getOrder(id) {
+    return await this.getData(`api/orders/${id}`);
   }
 }
