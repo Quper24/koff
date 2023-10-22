@@ -62,11 +62,9 @@ export class Cart {
   updateCart(id, quantity) {
     if (quantity === 0) {
       new ApiService().deleteProductFromCart(id);
-      console.log(this.cartData.products.length);
       this.cartData.products = this.cartData.products.filter(
         (item) => item.id !== id,
       );
-      console.log(this.cartData.products.length);
     } else {
       new ApiService().updateQuantityProductToCart(id, quantity);
       this.cartData.products.forEach((item) => {
@@ -355,7 +353,6 @@ export class Cart {
       e.preventDefault();
 
       const data = Object.fromEntries(new FormData(form));
-      console.log("data: ", data);
 
       const { orderId } = await new ApiService().postOrder(data);
       new Header().changeCount(0);

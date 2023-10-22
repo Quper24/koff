@@ -148,7 +148,6 @@ const init = () => {
       async (obj) => {
         new Catalog().mount(new Main().element);
         const data = await api.getProductById(obj.data.id);
-        console.log("data: ", data);
         new BreadCrumbs().mount(new Main().element, [
           {
             text: data.category,

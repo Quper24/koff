@@ -41,7 +41,6 @@ export class Order {
   }
 
   render(data) {
-    console.log("data: ", data);
     const totalPrice =
       parseInt(data.totalPrice) + (data.deliveryType === "delivery" ? 500 : 0);
     this.containerElement.innerHTML = `
