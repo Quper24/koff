@@ -2,6 +2,7 @@ import { API_URL } from "../../const";
 import { debounce } from "../../helpers";
 import { router } from "../../main";
 import { ApiService } from "../../services/ApiService";
+import { Header } from "../Header/Header";
 import { addContainer } from "../addContainer";
 
 export class Cart {
@@ -357,7 +358,7 @@ export class Cart {
       console.log("data: ", data);
 
       const { orderId } = await new ApiService().postOrder(data);
-
+      Header.changeCount(0);
       router.navigate(`/order/${orderId}`);
     });
 
