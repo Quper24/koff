@@ -23,7 +23,6 @@ export class BreadCrumbs {
     }
 
     isSame = data.every((item, i) => {
-      console.log(item.text, this.prevData[i].text);
       return item.text === this.prevData[i].text;
     });
     this.prevData = data;

@@ -24,6 +24,12 @@ const init = () => {
   new Main().mount();
   new Footer().mount();
 
+  router.hooks({
+    after() {
+      new Catalog().setActiveLink();
+    },
+  });
+
   router
     .on(
       "/",
