@@ -193,9 +193,9 @@ export class Cart {
     this.cartPlacePrice.classList.add("cart__place-price");
     this.cartPlacePrice.innerHTML = `${totalPrice.toLocaleString()}&nbsp;₽`;
 
-    const cartPlaceDelivery = document.createElement("p");
-    cartPlaceDelivery.classList.add("cart__place-delivery");
-    cartPlaceDelivery.textContent = "Доставка 0 ₽";
+    this.cartPlaceDelivery = document.createElement("p");
+    this.cartPlaceDelivery.classList.add("cart__place-delivery");
+    this.cartPlaceDelivery.textContent = "Доставка 500 ₽";
 
     const cartPlaceBtn = document.createElement("button");
     cartPlaceBtn.classList.add("cart__place-btn");
@@ -207,7 +207,7 @@ export class Cart {
     cartPlace.append(
       cartPlaceTitle,
       cartPlaceInfo,
-      cartPlaceDelivery,
+      this.cartPlaceDelivery,
       cartPlaceBtn,
     );
 
@@ -298,8 +298,10 @@ export class Cart {
     radioDeliveryFieldset.addEventListener("change", (e) => {
       if (e.target === deliveryInput) {
         address.disabled = false;
+        this.cartPlaceDelivery.textContent = "Доставка 500 ₽";
       } else {
         address.disabled = true;
+        this.cartPlaceDelivery.textContent = "Доставка 0 ₽";
         address.value = "";
       }
     });
@@ -335,7 +337,7 @@ export class Cart {
     cashInput.type = "radio";
     cashInput.name = "paymentType";
     cashInput.required = true;
-    cashInput.value = "pickup";
+    cashInput.value = "cash";
     cashInput.checked = true;
     cashLabel.append(cashInput, cashLabelText);
 

@@ -4,7 +4,7 @@ import Navigo from "navigo";
 import { Header } from "./modules/Header/Header";
 import { Footer } from "./modules/Footer/Footer";
 import { Main } from "./modules/Main/Main";
-import { ProductList } from "./modules/ProductList/productList";
+import { ProductList } from "./modules/ProductList/ProductList";
 import { ApiService } from "./services/ApiService";
 import { Catalog } from "./modules/Catalog/Catalog";
 import { FavoriteService } from "./services/StorageService";
@@ -13,6 +13,7 @@ import { BreadCrumbs } from "./features/BreadCrumbs/BreadCrumbs";
 import { ProductCard } from "./modules/ProductCard/ProductCard";
 import { productSlider } from "./features/productSlider/productSlider";
 import { Cart } from "./modules/Cart/Cart";
+import { Order } from "./modules/Order/Order";
 
 export const router = new Navigo("/", { linksSelector: 'a[href^="/"]' });
 
@@ -186,13 +187,19 @@ const init = () => {
         },
       },
     )
-    .on("/order/:id", ({ data: { id } }) => {
-      console.log(`order: ${id}`);
-
-      api.getOrder(id).then((data) => {
-        console.log(data);
-      });
-    })
+    .on(
+      "/order/:id",
+      async ({ data: { id } }) => {
+        const [order] = await api.getOrder(id);
+        new Order().mount(new Main().element, order);
+      },
+      {
+        leave(done) {
+          new Order().unmount();
+          done();
+        },
+      },
+    )
     .notFound(() => {
       new Main().element.innerHTML = `
       <h2>Страница не найдена</h2>

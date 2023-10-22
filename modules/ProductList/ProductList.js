@@ -1,4 +1,3 @@
-import { API_URL } from "../../const";
 import { Card } from "../../features/Card/Card";
 import { addContainer } from "../addContainer";
 
