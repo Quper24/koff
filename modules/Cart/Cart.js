@@ -358,7 +358,7 @@ export class Cart {
       console.log("data: ", data);
 
       const { orderId } = await new ApiService().postOrder(data);
-      Header.changeCount(0);
+      new Header().changeCount(0);
       router.navigate(`/order/${orderId}`);
     });
 
