@@ -195,7 +195,7 @@ const init = () => {
     .on(
       "/order/:id",
       async ({ data: { id } }) => {
-        const [order] = await api.getOrder(id);
+        const order = await api.getOrder(id);
         new Order().mount(new Main().element, order);
       },
       {
